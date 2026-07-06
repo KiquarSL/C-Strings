@@ -29,8 +29,6 @@ Use for fast run tests.
 
 Add test in `tests/CMakeLists.txt`
 
-**WARNING**: text in str is not c-string and not correct print. Use `to_cstr` for it.
-
 **Usage**
 ```bash
 cd tests
@@ -44,6 +42,8 @@ cd tests
 ```
 
 ## Docs
+
+**WARNING**: text in str is not c-string and not correct print. Use `to_cstr` for it.
 
 ```c
 /// Return new str with minimal capacity
