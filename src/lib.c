@@ -240,3 +240,28 @@ ssize_t str_rfind(str* s, char* to_find) {
 	}
 	return pos;
 }
+
+int str_rep(str* s, char* from, char* to) {
+	size_t from_len = strlen(from);
+	if (from_len > s->len) {
+		return 1;
+	}
+	for (size_t i=0; i<s->len; i++) {
+		char* subs = str_subs(s, i,from_len);
+		if (strcmp(subs, from) == 0) {
+			size_t to_len = strlen(to);
+			
+			int diff = from_len-to_len;
+			diff = abs(diff);
+			s->len += diff;
+			if(!str_is_fit(s, diff)) {
+				str_realloc(s, s->len + diff);
+			}
+			
+			memmove(s->text+i+to_len, s->text+i+to_len+1, from_len);
+			memcpy(s->text+i, to, to_len);
+			return 0;
+		}
+	}
+	return 1;
+}

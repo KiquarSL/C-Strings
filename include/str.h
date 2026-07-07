@@ -71,4 +71,9 @@ ssize_t str_lfind(str* s, char* to_find);
 /// Return -1 if not found
 ssize_t str_rfind(str* s, char* to_find);
 
+/// Replace single `from` to `to`
+/// Return 1 if not found
+/// Return 0 if successful
+int str_rep(str* s, char* from, char* to);
+
 #endif
