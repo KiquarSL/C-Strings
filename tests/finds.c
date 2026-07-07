@@ -18,7 +18,7 @@ int main() {
 	printf("Right finded at: %zu\n", rfind);
 	
 	assert(lfind == 0);
-	assert(lfind == 19);
+	assert(rfind == 19);
 	
 	str_free(s);
 	return 0;
