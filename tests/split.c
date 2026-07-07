@@ -8,10 +8,10 @@ int main() {
 	str* s = to_str("Hi Some 124");
 	
 	char* text = to_cstr(s);
-	char** split = str_split(s, ' ');
+	splited* split = str_split(s, ' ');
 	printf("Strings:\n");
-	for(size_t i=0; i<3; i++) {
-		printf("%s\n", split[i]);
+	for(size_t i=0; i<split->size; i++) {
+		printf("%s\n", split->text[i]);
 	}
 	
 	printf("Length: %zu\n", str_len(s));

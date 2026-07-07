@@ -59,7 +59,7 @@ size_t str_len(str *s) {
 	return s->len;
 }
 
-char** str_split(str* s, char divider) {
+splited* str_split(str* s, char divider) {
 	size_t strs_size = sizeof(char*) * 10;
 	char** strs = malloc(strs_size);
 	size_t strs_last = 0;
@@ -108,8 +108,13 @@ char** str_split(str* s, char divider) {
 		
 		memcpy(strs[strs_last], subs, len);
 		strs[strs_last][len] = '\0';
+		
+		strs_last++;
 	}
-	return strs;
+	splited* spltd = malloc(sizeof(splited));
+	spltd->text = strs;
+	spltd->size = strs_last;
+	return spltd;
 }
 
 // push

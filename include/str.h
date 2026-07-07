@@ -11,6 +11,11 @@ typedef struct str {
 	size_t cap;
 } str;
 
+typedef struct splited {
+	char** text;
+	size_t size;
+} splited;
+
 
 /// Return new str with minimal capacity
 str* str_new();
@@ -54,7 +59,7 @@ char* str_get(str* s, size_t index);
 char* str_subs(str* s, size_t index, size_t len);
 
 /// Split string with divider
-/// Return list of c-strings
-char** str_split(str* s, char divider);
+/// Return list of structure with c-string and length
+splited* str_split(str* s, char divider);
 
 #endif

@@ -162,3 +162,18 @@ char* str_subs(str* s, size_t index, size_t len);
 str* s = to_str("Hello!");
 char* subs = str_get(s, 0, 4); // Hell
 ```
+
+```c
+/// Split string with divider
+/// Return list of c-strings
+char** str_split(str* s, char divider);
+
+// Example
+str* s = to_str("Hi Some 124");
+	
+char* text = to_cstr(s);
+splited* split = str_split(s, ' ');
+for(size_t i=0; i<split->size; i++) {
+	printf("%s\n", split->text[i]);
+}
+```
