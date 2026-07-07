@@ -17,11 +17,15 @@ bool str_is_fit(str* s, size_t len) {
 // Public
 
 str* str_new() {
+	return str_new_cap(MIN_CAPACITY);
+}
+
+str* str_new_cap(size_t cap) {
 	str* s = malloc(sizeof(str));
 	if(s == NULL) {
 		return NULL;
 	}
-	s->cap = MIN_CAPACITY;
+	s->cap = cap;
 	s->len = 0;
 	s->text = malloc(sizeof(s->cap));
 	if(s->text == NULL) {

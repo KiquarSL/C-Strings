@@ -21,6 +21,9 @@ typedef struct splited {
 /// Return new str with minimal capacity
 str* str_new();
 
+/// Return new str with capacity
+str* str_new_cap(size_t cap);
+
 /// Return new str with text
 str* to_str(char* text);
 
