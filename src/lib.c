@@ -245,10 +245,10 @@ ssize_t str_rfind(str* s, char* to_find) {
 	return pos;
 }
 
-int str_rep(str* s, char* from, char* to) {
+bool str_rep(str* s, char* from, char* to) {
 	size_t from_len = strlen(from);
 	if (from_len > s->len) {
-		return 1;
+		return false;
 	}
 	for (size_t i=0; i<s->len; i++) {
 		char* subs = str_subs(s, i,from_len);
@@ -264,8 +264,12 @@ int str_rep(str* s, char* from, char* to) {
 			
 			memmove(s->text+i+to_len, s->text+i+to_len+1, from_len);
 			memcpy(s->text+i, to, to_len);
-			return 0;
+			return true;
 		}
 	}
-	return 1;
+	return false;
+}
+
+int str_cmp(str* s1, str* s2) {
+	return memcmp(s1->text,s2->text, s1->len);
 }

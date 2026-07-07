@@ -5,6 +5,7 @@
 
 #include<stddef.h>
 #include<sys/types.h>
+#include<stdbool.h>
 
 typedef struct str {
 	char* text;
@@ -75,8 +76,11 @@ ssize_t str_lfind(str* s, char* to_find);
 ssize_t str_rfind(str* s, char* to_find);
 
 /// Replace single `from` to `to`
-/// Return 1 if not found
-/// Return 0 if successful
-int str_rep(str* s, char* from, char* to);
+/// Return false if not found
+/// Return true if successful
+bool str_rep(str* s, char* from, char* to);
+
+/// Comapre strings with memcmp
+int str_cmp(str* s1, str* s2);
 
 #endif
