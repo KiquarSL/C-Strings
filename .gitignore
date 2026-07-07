@@ -1,2 +1,5 @@
 build
+html
+latex
 compile_commands.json
+docs

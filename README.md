@@ -1,5 +1,13 @@
 # Strings lib
 
+**WARNING**: text in str is not c-string and not correct print. Use `to_cstr` for it.
+
+## Generate docs
+```sh
+doxygen
+
+# Open docs/html/index.html
+```
 
 ## Scripts
 #### run.sh
@@ -39,140 +47,4 @@ cd tests
 ```bash
 cd tests
 ./add_test.sh push push.c
-```
-
-## Docs
-
-**WARNING**: text in str is not c-string and not correct print. Use `to_cstr` for it.
-
-```c
-/// Return new str with minimal capacity
-str* str_new();
-
-// Exmaple
-str* s = str_new();
-```
-
-```c
-/// Return new str from c-string
-str* to_str(char* text);
-
-// Exmaple
-str* s = to_str("Kiquar");
-```
-
-```c
-/// Free str and text inside
-void str_free(str* s);
-
-// Exmaple
-str_free(s);
-```
-
-```c
-/// Push char to end of string
-str* str_push(str* s, char c);
-
-// Exmaple
-str* s = to_str("Hell");
-str_push(s, 'o');
-```
-
-```c
-/// Push c-string to end of string
-str* str_push_cstr(str* s, char* text);
-
-// Exmaple
-str* s = to_str("Hello");
-str_push_cstr(s, ", World");
-```
-
-```c
-/// Push str2 to end of str
-str* str_push_str(str* s, str* s2);
-
-// Exmaple
-str* s = to_str("Hello, ");
-str* s2 = to_str("World!");
-str_push_str(s, s2);
-```
-
-```c
-/// Insert char by position
-str* str_ins(str* s, size_t pos, char c);
-
-// Exmaple
-str* s = to_str("Helo");
-str_ins(s, 2, 'l');
-```
-
-```c
-/// Insert c-string by position
-str* str_ins_cstr(str* s, size_t pos, char* text);
-
-// Exmaple
-str* s = to_str("Hello, ");
-str_ins_cstr(s, 7, "World!);
-```
-
-```c
-/// Insert str by position
-str* str_ins_str(str* s, size_t pos, str* s2);
-
-// Exmaple
-str* s = to_str("Hello, ");
-str* s2 = to_str("Kiquar!");
-str_ins_str(s, 7, s2);
-```
-
-```c
-/// Get c-string from str (copy with '\0')
-char* to_cstr(str* s);
-
-// Exmaple
-str* s = to_str("Hello");
-printf("%s\n", to_cstr(s));
-```
-
-```c
-/// Return string length
-size_t str_len(str* s);
-
-// Exmaple
-str* s = to_str("Hello");
-printf("Length string: %zu\n", str_len(s));
-```
-
-```c
-/// Get char pointer by index
-/// Return NULL by out of bounds
-char* str_get(str* s, size_t index);
-
-// Example
-str* s = to_str("Magic");
-char c = *str_get(s, 1); // a
-```
-
-```c
-/// Substring by index with length
-/// Return NULL by out of bounds
-char* str_subs(str* s, size_t index, size_t len);
-
-// Example
-str* s = to_str("Hello!");
-char* subs = str_get(s, 0, 4); // Hell
-```
-
-```c
-/// Split string with divider
-/// Return list of c-strings
-char** str_split(str* s, char divider);
-
-// Example
-str* s = to_str("Hi Some 124");
-	
-splited* split = str_split(s, ' ');
-for(size_t i=0; i<split->size; i++) {
-	printf("%s\n", split->text[i]);
-}
 ```
