@@ -208,3 +208,35 @@ char* str_subs(str* s, size_t index, size_t len) {
 	copy[len] = '\0';
 	return copy;
 }
+
+ssize_t str_lfind(str* s, char* to_find) {
+	size_t len = strlen(to_find);
+	ssize_t pos = -1;
+	for(size_t i=0; i<s->len; i++) {
+		if(i+len >= s->len) {
+			break;
+		}
+		char* subs = str_subs(s, i, len);
+		if(strcmp(subs,to_find) == 0) {
+			pos = i;
+			break;
+		}
+	}
+	return pos;
+}
+
+ssize_t str_rfind(str* s, char* to_find) {
+	size_t len = strlen(to_find);
+	if (len > s->len) {
+		return -1;
+	}
+	ssize_t pos = -1;
+	for(size_t i=s->len-1-len; i>= 0; i--) {
+		char* subs = str_subs(s, i, len);
+		if(strcmp(subs,to_find) == 0) {
+			pos = i;
+			break;
+		}
+	}
+	return pos;
+}

@@ -33,3 +33,7 @@ add_test(NAME subs COMMAND subs)
 add_executable(split split.c)
 target_link_libraries(split strings)
 add_test(NAME split COMMAND split)
+
+add_executable(finds finds.c)
+target_link_libraries(finds strings)
+add_test(NAME finds COMMAND finds)

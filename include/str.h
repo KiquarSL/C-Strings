@@ -4,6 +4,7 @@
 #define MIN_CAPACITY 10
 
 #include<stddef.h>
+#include<sys/types.h>
 
 typedef struct str {
 	char* text;
@@ -61,5 +62,13 @@ char* str_subs(str* s, size_t index, size_t len);
 /// Split string with divider
 /// Return list of structure with c-string and length
 splited* str_split(str* s, char divider);
+
+/// Return position on substring position starts left
+/// Return -1 if not found
+ssize_t str_lfind(str* s, char* to_find);
+
+/// Return position on substring position starts right
+/// Return -1 if not found
+ssize_t str_rfind(str* s, char* to_find);
 
 #endif
