@@ -1,4 +1,6 @@
+#include <stdarg.h>
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
@@ -122,6 +124,24 @@ splited* str_split(str* s, char divider) {
 }
 
 // push
+str* str_pushf(str* s, char* fmt, ...) {
+	va_list args;
+	va_start(args, fmt);
+	char buffer[1024];
+	vsnprintf(buffer, sizeof(buffer), fmt, args);
+	va_end(args);
+	
+	size_t buffer_len = strlen(buffer);
+	if (!str_is_fit(s, buffer_len)) {
+		size_t min_cap = s->len+buffer_len;
+		size_t new_cap = min_cap * 1.5;
+		str_realloc(s, new_cap);
+	}
+	memcpy(s->text+s->len, buffer, buffer_len);
+	s->len += buffer_len;
+	return s;
+}
+
 str* str_push(str* s, char c) {
 	if(!str_is_fit(s, 1)) {
 		str_realloc(s, s->cap*2);

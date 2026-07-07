@@ -41,3 +41,7 @@ add_test(NAME finds COMMAND finds)
 add_executable(rep rep.c)
 target_link_libraries(rep strings)
 add_test(NAME rep COMMAND rep)
+
+add_executable(pushf pushf.c)
+target_link_libraries(pushf strings)
+add_test(NAME pushf COMMAND pushf)

@@ -31,6 +31,9 @@ str* to_str(char* text);
 /// Free str and text inside
 void str_free(str* s);
 
+/// Push c-string with format to end of string
+str* str_pushf(str* s, char* fmt, ...);
+
 /// Push char to end of string
 str* str_push(str* s, char c);
 
