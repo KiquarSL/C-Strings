@@ -45,4 +45,16 @@ char* to_cstr(str* s);
 /// Return string length
 size_t str_len(str* s);
 
+/// Get char pointer by index
+/// Return NULL by out of bounds
+char* str_get(str* s, size_t index);
+
+/// Substring by index with length
+/// Return NULL by out of bounds
+char* str_subs(str* s, size_t index, size_t len);
+
+/// Split string with divider
+/// Return list of c-strings
+char** str_split(str* s, char divider);
+
 #endif

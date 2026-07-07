@@ -142,3 +142,23 @@ size_t str_len(str* s);
 str* s = to_str("Hello");
 printf("Length string: %zu\n", str_len(s));
 ```
+
+```c
+/// Get char pointer by index
+/// Return NULL by out of bounds
+char* str_get(str* s, size_t index);
+
+// Example
+str* s = to_str("Magic");
+char c = *str_get(s, 1); // a
+```
+
+```c
+/// Substring by index with length
+/// Return NULL by out of bounds
+char* str_subs(str* s, size_t index, size_t len);
+
+// Example
+str* s = to_str("Hello!");
+char* subs = str_get(s, 0, 4); // Hell
+```

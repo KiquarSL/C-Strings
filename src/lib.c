@@ -18,9 +18,16 @@ bool str_is_fit(str* s, size_t len) {
 
 str* str_new() {
 	str* s = malloc(sizeof(str));
+	if(s == NULL) {
+		return NULL;
+	}
 	s->cap = MIN_CAPACITY;
 	s->len = 0;
 	s->text = malloc(sizeof(s->cap));
+	if(s->text == NULL) {
+		free(s);
+		return NULL;
+	}
 	return s;
 }
 
@@ -50,6 +57,59 @@ void str_free(str* s) {
 
 size_t str_len(str *s) {
 	return s->len;
+}
+
+char** str_split(str* s, char divider) {
+	size_t strs_size = sizeof(char*) * 10;
+	char** strs = malloc(strs_size);
+	size_t strs_last = 0;
+	size_t start = 0;
+	
+	for (size_t i=0; i<s->len; i++) {
+		// Not using cheking on error because get char inside text
+		if(*str_get(s, i) == divider){
+			if(strs_last >= strs_size) {
+				strs_size *= 1.5;
+				strs = realloc(strs, strs_size);
+			}
+			
+			size_t len = i-start;
+			
+			strs[strs_last] = malloc(len+1);
+			
+			char* subs = str_subs(s, start, len);
+			if(subs == NULL) {
+				for(size_t j=0; j<strs_last; j++) {
+					free(strs[j]);
+				}
+				free(strs);
+				return NULL;
+			}
+			
+			memcpy(strs[strs_last], subs, len);
+			strs[strs_last][len] = '\0';
+			start = i+1; // +1 for skip divider
+			
+			strs_last++;
+		}
+	}
+	if(start < s->len) {
+		size_t len = s->len-start;	
+		strs[strs_last] = malloc(len+1);
+		
+		char* subs = str_subs(s, start, len);
+		if(subs == NULL) {
+			for(size_t j=0; j<strs_last; j++) {
+				free(strs[j]);
+			}
+			free(strs);
+			return NULL;
+		}
+		
+		memcpy(strs[strs_last], subs, len);
+		strs[strs_last][len] = '\0';
+	}
+	return strs;
 }
 
 // push
@@ -123,3 +183,23 @@ str* str_ins_str(str* s, size_t pos, str* s2) {
 	return s;
 }
 // insert end
+
+char* str_get(str* s, size_t index) {
+	if(index >= s->len) {
+		return NULL;
+	}
+	return &s->text[index];
+}
+
+char* str_subs(str* s, size_t index, size_t len) {
+	if(index >= s->len || index+len > s->len) {
+		return NULL;
+	}
+	char* copy = malloc(len+1);
+	if (copy == NULL) {
+		return NULL;
+	}
+	memcpy(copy, s->text+index, len);
+	copy[len] = '\0';
+	return copy;
+}

@@ -21,3 +21,15 @@ add_test(NAME ins_cstr COMMAND ins_cstr)
 add_executable(ins_str ins_str.c)
 target_link_libraries(ins_str strings)
 add_test(NAME ins_str COMMAND ins_str)
+
+add_executable(get get.c)
+target_link_libraries(get strings)
+add_test(NAME get COMMAND get)
+
+add_executable(subs subs.c)
+target_link_libraries(subs strings)
+add_test(NAME subs COMMAND subs)
+
+add_executable(split split.c)
+target_link_libraries(split strings)
+add_test(NAME split COMMAND split)
